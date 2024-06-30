@@ -49,7 +49,7 @@
         {#if typeof content === "string"}
           {content}
         {:else}
-          <svelte:component this={content} />
+          <svelte:component   this={content} />
         {/if}
       </div>
       <div>

@@ -1,7 +1,8 @@
 <script>
   import { onMount } from 'svelte';
   import { createSecretaria } from '../../../services/secretarias/secretariasService.ts';
-
+  import SecretariasList from '../secretariasList/SecretariasList.svelte';
+  import { addSecretaria } from '../../../stores/secretariasStore.js'; // Importa la función addSecretaria
 
 
 
@@ -30,12 +31,13 @@
       return;
     }
     const response = await createSecretaria(secretaria);
-
+    console.log(response)
     alert('Secretaria creada con exito')
-    console.log(response);
     secretaria = {
       nombre: ''
     };
+    addSecretaria(response);
+
   };
 
 </script>
@@ -63,12 +65,4 @@
 </div>
 
 <!-- Fetch -->
-<div class="card rounded mt-1">
-  <div class="p-3 card-header">
-    LISTADO DE SECRETARIAS
-  </div>
-  <div class="card-body">
-
-  </div>
-  
-</div>
+<SecretariasList  />

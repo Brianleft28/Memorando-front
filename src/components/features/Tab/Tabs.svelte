@@ -1,5 +1,4 @@
 <script lang="ts">
-  import SecretariasForm from "../secretariasForm/SecretariasForm.svelte";
   import type { TabItem } from "./tab.types";
 
   export let tabs: TabItem[] = [
@@ -13,11 +12,7 @@
       title: "Memos de salida",
       content: "Contenido de Memos de salida...",
     },
-    {
-      id: "secretarias",
-      title: "Secretarias",
-      content: SecretariasForm,
-    },
+  
   ];
 
   let activeTab = tabs[0]?.id; // Default to the first tab
@@ -46,11 +41,7 @@
   {#each tabs as { id, content }}
     {#if activeTab === id}
       <div class="pt-1 show active fade" {id} role="tabpanel">
-        {#if typeof content === "string"}
           {content}
-        {:else}
-          <svelte:component   this={content} />
-        {/if}
       </div>
       <div>
       </div>

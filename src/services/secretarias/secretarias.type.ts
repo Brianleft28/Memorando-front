@@ -5,10 +5,11 @@ import type { SvelteComponent } from "svelte";
  */
 
 export interface Secretaria {
+  id: number;
   nombre: string;
 }
 
-export interface SecretariaResponse {
+export interface SqlResponse {
   fieldCount: number;
   affectedRows: number;
   insertId: number;

@@ -1,3 +1,1 @@
-<p class="text-body-secondary">
-    memos de entrada
-</p>
+<p class="text-body-secondary">memos de entrada</p>

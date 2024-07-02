@@ -1,16 +1,16 @@
 <script lang="ts">
   import { deleteSecretaria } from "../../services/secretarias/secretariasService";
-
-  import { deleteSecretaria as deleteS } from "../../stores/secretariasStore";
-
   export let id: number;
+  export let fetch;
 
   const handleDelete = () => {
     if (!confirm("¿Estás seguro de eliminar esta secretaria?")) {
-      console.log("No se elimino la secretaria");
+      return;
     } else {
-      deleteS(id);
+      deleteSecretaria(id);
+      fetch();
     }
+    fetch();
   };
 </script>
 

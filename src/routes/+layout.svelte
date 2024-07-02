@@ -4,9 +4,13 @@
 
 <Header />
 
-<main class="bg-secondary">
+<main>
   <div class="container">
-    <slot />
+    <div class="row">
+      <div class="col">
+        <slot />
+      </div>
+    </div>
   </div>
 </main>
 

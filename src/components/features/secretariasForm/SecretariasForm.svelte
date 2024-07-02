@@ -1,14 +1,13 @@
-<script>
-  import { onMount } from "svelte";
-  import { createSecretaria } from "../../../services/secretarias/secretariasService.ts";
-  import SecretariasList from "../secretariasList/SecretariasList.svelte";
-  import { addSecretaria } from "../../../stores/secretariasStore.ts"; // Importa la función addSecretaria
+<script lang="ts">
+  import { createSecretaria } from "../../../services/secretarias/secretariasService";
+
+  export let fetchSecretarias;
 
   let secretaria = {
     nombre: "",
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     if (secretaria.nombre === "") {
@@ -29,20 +28,25 @@
       );
       return;
     }
-    const response = await createSecretaria(secretaria);
+    try {
+      const response = await createSecretaria(secretaria);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+    fetchSecretarias();
     alert("Secretaria creada con exito");
     secretaria = {
       nombre: "",
     };
-    addSecretaria(response);
   };
 </script>
 
-<div class="card rounded">
+<div class="card rounded bg-body-tertiary mt-5">
   <h3 class="card-header p-3">Secretarias</h3>
   <div class="card-body">
     <form class="row justify-content-start align-items-center">
-      <div class=" form-floating col-md-5">
+      <div class="col-md-8 col form-floating col-lg-5">
         <input
           bind:value={secretaria.nombre}
           class="form-control"
@@ -51,12 +55,12 @@
         />
         <label for="floatingTextarea">Nombre de secretaria</label>
       </div>
-      <div class="col-md-2">
-        <button on:click={handleSubmit} class="col-md btn btn-primary"
+      <div class="col-lg-2 col-md-4 col-sm text-center-md my-2">
+        <button on:click={handleSubmit} class="col-md btn btn-dark"
           >Agregar</button
         >
       </div>
-      <div class=" col-md-3 offset-md-2">
+      <div class="col-md-3 offset-md-2">
         <div class="input-icon-container">
           <input class="form-control" placeholder="Buscar" type="text" />
           <!-- Search Icon -->

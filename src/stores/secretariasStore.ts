@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import type { Secretaria } from "./secretarias.type.ts";
+import type { Secretaria } from "./secretariasStore.type.ts";
 import { deleteSecretaria as deleteSecretariaService } from "../services/secretarias/secretariasService";
 export const secretarias = writable([]);
 

@@ -1,10 +1,12 @@
 /**
+ * Este archivo contiene las funciones que se encargan de realizar las peticiones al servidor para la creación, actualización y eliminación de secretarias.
+ */
+import type { Secretaria } from "./secretarias.type";
+/**
  * Esta función se encarga de crear una secretaria.
  * @param secretaria Objeto que representa la secretaria a crear.
  * @returns Promesa que resuelve al objeto de respuesta de la creación de la secretaria.
  */
-
-import type { Secretaria } from "./secretarias.type";
 
 export async function createSecretaria(
   secretaria: Secretaria

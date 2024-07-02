@@ -56,11 +56,42 @@
           >Agregar</button
         >
       </div>
-      <div></div>
+      <div class=" col-md-3 offset-md-2">
+        <div class="input-icon-container">
+          <input class="form-control" placeholder="Buscar" type="text" />
+          <!-- Search Icon -->
+          <div class="search-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-search"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </div>
 <div></div>
 
-<!-- Fetch -->
-<SecretariasList />
+<style>
+  .input-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 0;
+    padding: 0.375rem 0.75rem;
+    pointer-events: none;
+  }
+</style>

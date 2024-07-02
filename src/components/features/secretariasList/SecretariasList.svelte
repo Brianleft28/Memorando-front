@@ -35,8 +35,10 @@
 </script>
 
 <div class="card rounded mt-1">
-  <div class="p-3 card-header">LISTADO DE SECRETARIAS</div>
-
+  <div class="card-header row align-items-center">
+    <p class="col-6">Listado de secretarias</p>
+    <div class="col-3 align-self-end offset-md-3"></div>
+  </div>
   <div class="card-body">
     <table class="table table-hover">
       <thead>
@@ -81,8 +83,8 @@
           <tr class="row">
             <td class="col-6">{secretaria.nombre}</td>
             <div class="col-6 d-flex justify-content-end">
-              <td><ButtonDelete id={secretaria.id} /></td>
-              <td
+              <td class=""><ButtonDelete id={secretaria.id} /></td>
+              <td class=""
                 ><ButtonEdit
                   on:close={handleEditMode(secretaria.id, secretaria.nombre)}
                 /></td

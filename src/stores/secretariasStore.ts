@@ -3,6 +3,12 @@ import type { Secretaria } from "./secretarias.type.ts";
 import { deleteSecretaria as deleteSecretariaService } from "../services/secretarias/secretariasService";
 export const secretarias = writable([]);
 
+/**
+ * @function getSecretarias
+ * @description Obtiene las secretarias
+ * @returns {Promise<Secretaria[]>}
+ * @example const secretarias = await getSecretarias();
+ */
 const url = "http://localhost:3000/api/v1/secretarias";
 const options = {
   method: "GET",

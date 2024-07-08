@@ -1,20 +1,4 @@
-<script lang="ts">
-  import { deleteSecretaria } from "../../services/secretarias/secretariasService";
-  export let id: number;
-  export let fetch;
-
-  const handleDelete = () => {
-    if (!confirm("¿Estás seguro de eliminar esta secretaria?")) {
-      return;
-    } else {
-      deleteSecretaria(id);
-      fetch();
-    }
-    fetch();
-  };
-</script>
-
-<button on:click={handleDelete} class="btn btn-outline-danger">
+<button class="btn btn-danger col">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"

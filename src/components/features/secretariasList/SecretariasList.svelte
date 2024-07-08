@@ -1,22 +1,16 @@
-<script>
-  import { onMount } from "svelte";
-  import {
-    secretarias,
-    getSecretarias,
-    updateSecretaria,
-  } from "../../../stores/secretariasStore.ts";
+<script lang="ts">
   import ButtonDelete from "../../common/ButtonDelete.svelte";
   import ButtonEdit from "../../common/ButtonEdit.svelte";
+  import { updateSecretarias } from "../../../services/secretarias/secretariasService";
 
-  onMount(() => {
-    getSecretarias();
-  });
+  export let dataSecretarias;
+  export let fetchSecretarias;
 
   let editMode = false;
-  let editingSecretariaId = null;
+  let editingSecretariaId: any = null;
   let editingNombre = "";
 
-  const handleEditMode = (secretariaId, nombre) => {
+  const handleEditMode = (secretariaId: number, nombre: string) => {
     editMode = !editMode;
     editingSecretariaId = secretariaId;
     editingNombre = nombre;
@@ -27,32 +21,33 @@
     editingNombre = "";
   };
 
-  let handleSave = (id, nombre) => {
+  const handleSave = async (id: any, nombre: any) => {
     editMode = false;
-    updateSecretaria(id, nombre);
-    editingNombre = "";
+    try {
+      const response = await updateSecretarias(id, nombre);
+      editingNombre = "";
+      fetchSecretarias();
+    } catch {
+      console.error("Error al actualizar la secretaria");
+    }
+
+
   };
 </script>
 
-<div class="card rounded mt-1">
-  <div class="p-3 card-header">LISTADO DE SECRETARIAS</div>
-
-  <div class="card-body">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Secretaria</th>
-        </tr>
-      </thead>
+<div class="card mt-2">
+    <table class="table table-hover bg-body-tertiary rounded-1">
       <tbody>
         {#if editMode === true}
-          {#each $secretarias as secretaria}
+          {#each dataSecretarias as secretaria}
             {#if secretaria.id === editingSecretariaId}
-              <tr class="row">
+              <tr>
                 <td>
-                  <h2>Editar secretaria</h2>
+                  <p>Editar Secretaría</p>
+                </td>
+                <td>
                   <input
-                    class="form-control col-6"
+                    class="form-control"
                     type="text"
                     placeholder={secretaria.nombre}
                     bind:value={editingNombre}
@@ -60,10 +55,12 @@
                 >
                 <td>
                   <button
-                    on:click={handleSave(secretaria.id, editingNombre)}
-                    class="btn btn-success">Guardar</button
+                    on:click={() => {
+                      handleSave(secretaria.id, editingNombre);
+                    }}
+                    class="btn btn-outline-success">Guardar</button
                   >
-                  <button on:click={handleCancel} class="btn btn-danger"
+                  <button on:click={handleCancel} class="btn btn-outline-danger"
                     >Cancelar</button
                   >
                 </td>
@@ -72,25 +69,30 @@
           {/each}
         {/if}
 
-        {#if $secretarias.length === 0}
+        {#if dataSecretarias.length === 0}
           <tr class="row">
             <td class="col-12">No hay secretarias registradas</td>
           </tr>
         {/if}
-        {#each $secretarias as secretaria}
-          <tr class="row">
+        {#each dataSecretarias as secretaria}
+          <tr class="d-flex">
             <td class="col-6">{secretaria.nombre}</td>
-            <div class="col-6 d-flex justify-content-end">
-              <td><ButtonDelete id={secretaria.id} /></td>
-              <td
-                ><ButtonEdit
-                  on:close={handleEditMode(secretaria.id, secretaria.nombre)}
-                /></td
-              >
-            </div>
+            <td class="col-6 d-flex justify-content-end">
+              <div class="d-flex">
+                <div class="me-3">
+                  <ButtonDelete fetch={fetchSecretarias} id={secretaria.id} />
+                </div>
+                <div class="">
+                  <ButtonEdit
+                    on:close={() => {
+                      handleEditMode(secretaria.id, secretaria.nombre);
+                    }}
+                  />
+                </div>
+              </div>
+            </td>
           </tr>
         {/each}
       </tbody>
     </table>
-  </div>
 </div>

@@ -7,5 +7,5 @@ import type { SvelteComponent } from "svelte";
 export interface TabItem {
   id: string;
   title: string;
-  content: SvelteComponent | string;
+  content: new (...args: any) => SvelteComponent;
 }

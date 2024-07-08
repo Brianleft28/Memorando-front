@@ -3,6 +3,4 @@
   import Hero from "../components/layouts/Hero.svelte";
 </script>
 
-<div>
-  <Hero/>
-</div>
+<Hero />

@@ -1,17 +1,4 @@
-<script lang="ts">
-
-  import { createEventDispatcher } from "svelte";
-
-  const dispatch = createEventDispatcher();
-
-  const editHandler = () => {
-    dispatch("close", () => {
-      console.log("close");
-    });
-  };
-</script>
-
-<button class="btn btn-info" on:click={editHandler}>
+<button class="btn btn-info col">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
